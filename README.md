@@ -24,11 +24,11 @@ In the terminal type:
 ```bash
 # printing a neutral stimuli
 # (text displayed in one color):
-# COming soon! $ stroop neutral 5x10
+$ stroop neutral 5x10
 
 # printing congruent stimuli
 # (text color and word refer to the same color):
-# Coming soon! $ stroop congruent 5x10
+$ stroop congruent 5x10
 
 # printing incongruent stimuli
 # (text color and word do not refer to the same color):
@@ -45,9 +45,17 @@ If you want to use Stroop in Ruby you can run the following code:
 require 'stroop'
 
 # adjust rows and columns to whatever you like
-Stroop::Generator.print(columns: 5, rows: 10)
+mode = Stroop::Generator::NEUTRAL
+Stroop::Generator.print(columns: 5, rows: 10, mode: mode)
 ```
 
+The available Generator modes are:
+
+```ruby
+Stroop::Generator::NEUTRAL     # => :neutral
+Stroop::Generator::CONGRUENT   # => :congruent
+Stroop::Generator::INCONGRUENT # => :incongruent
+```
 
 ## MIT License
 
