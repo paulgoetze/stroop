@@ -1,0 +1,18 @@
+sudo: false
+language: ruby
+
+script: bundle exec ruby spec/stroop_spec.rb
+
+rvm:
+- 2.2
+- 2.1
+- 2.0
+- rbx-2
+- jruby-head
+- jruby-9000
+
+cache:
+- bundler
+
+matrix:
+  fast_finish: true

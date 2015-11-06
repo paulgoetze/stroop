@@ -1,0 +1,10 @@
+#! /usr/bin/env ruby
+
+begin
+  require 'stroop'
+rescue LoadError => e
+  warn "could not load \"stroop\"\n#{e}"
+  exit -1
+end
+
+Stroop::CLI.start
