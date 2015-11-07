@@ -45,16 +45,16 @@ If you want to use Stroop in Ruby you can run the following code:
 require 'stroop'
 
 # adjust rows and columns to whatever you like
-mode = Stroop::Generator::NEUTRAL
-Stroop::Generator.print(columns: 5, rows: 10, mode: mode)
+set = Stroop::Set.new(columns: 5, rows: 10, mode: Stroop::Set::NEUTRAL)
+set.to_s # => returns the string of colorized words
 ```
 
-The available Generator modes are:
+The available Stroop::Set modes are:
 
 ```ruby
-Stroop::Generator::NEUTRAL     # => :neutral
-Stroop::Generator::CONGRUENT   # => :congruent
-Stroop::Generator::INCONGRUENT # => :incongruent
+Stroop::Set::NEUTRAL     # => :neutral
+Stroop::Set::CONGRUENT   # => :congruent
+Stroop::Set::INCONGRUENT # => :incongruent
 ```
 
 ## MIT License
