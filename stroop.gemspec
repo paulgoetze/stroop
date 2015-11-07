@@ -17,7 +17,7 @@ Gem::Specification.new do |gem|
   gem.test_files    = gem.files.grep(%r{^(test|spec|features)/})
   gem.require_paths = ['lib']
 
-  gem.required_ruby_version = '~> 2.0'
+  gem.required_ruby_version = '~> 2.1'
 
   gem.add_runtime_dependency     'colorize', '~> 0.7'
   gem.add_runtime_dependency     'thor',     '~> 0.19'
