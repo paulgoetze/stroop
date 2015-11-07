@@ -1,5 +1,5 @@
 require 'thor'
-require_relative 'generator'
+require_relative 'set'
 
 module Stroop
   class CLI < Thor
@@ -12,17 +12,17 @@ module Stroop
 
     desc 'neutral COLSxROWS', 'prints neutral color words in COLS columns and ROWS rows'
     def neutral(size = '10x5')
-      print(size: size, mode: Generator::NEUTRAL)
+      print(size: size, mode: Set::NEUTRAL)
     end
 
     desc 'congruent COLSxROWS', 'prints congruent color words in COLS columns and ROWS rows'
     def congruent(size = '10x5')
-      print(size: size, mode: Generator::CONGRUENT)
+      print(size: size, mode: Set::CONGRUENT)
     end
 
     desc 'incongruent COLSxROWS', 'prints incongruent color words in COLS columns and ROWS rows'
     def incongruent(size = '10x5')
-      print(size: size, mode: Generator::INCONGRUENT)
+      print(size: size, mode: Set::INCONGRUENT)
     end
 
     private
@@ -32,7 +32,7 @@ module Stroop
       rows_count    = apply_default_size(rows)
       columns_count = apply_default_size(columns)
 
-      Generator.print(rows: rows_count, columns: columns_count, mode: mode)
+      puts Set.new(rows: rows_count, columns: columns_count, mode: mode)
     end
 
     def dimensions(size)

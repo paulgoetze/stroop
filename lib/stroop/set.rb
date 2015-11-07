@@ -1,7 +1,8 @@
 require 'colorize'
+require_relative 'exceptions'
 
 module Stroop
-  class Generator
+  class Set
 
     COLORS = %w{ black white red green blue yellow }
 
@@ -13,28 +14,26 @@ module Stroop
 
     attr_reader :rows, :columns, :mode
 
-    def self.print(*args)
-      self.new(*args).print
-    end
-
     def initialize(rows:, columns:, mode:)
+      raise SetModeNotAvailable.new unless MODES.include?(mode)
+
       @rows    = rows.to_i.abs
       @columns = columns.to_i.abs
       @mode    = mode.to_sym
     end
 
-    def print
-      return unless MODES.include?(mode)
-
-      puts empty_line
-      (1..rows).each { puts line }
-      puts empty_line
+    def to_s
+      [empty_line, *lines, empty_line].join("\n")
     end
 
     private
 
     def empty_line
       wrap(space * (total_word_width * columns))
+    end
+
+    def lines
+      (1..rows).map { line }
     end
 
     def line
