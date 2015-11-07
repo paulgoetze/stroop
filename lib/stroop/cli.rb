@@ -6,10 +6,6 @@ module Stroop
 
     DEFAULT_SIZE = 5.freeze
 
-    def self.start
-      super
-    end
-
     desc 'neutral COLSxROWS', 'prints neutral color words in COLS columns and ROWS rows'
     def neutral(size = '10x5')
       print(size: size, mode: Set::NEUTRAL)
@@ -29,10 +25,10 @@ module Stroop
 
     def print(size:, mode:)
       rows, columns = dimensions(size)
-      rows_count    = apply_default_size(rows)
-      columns_count = apply_default_size(columns)
+      rows          = apply_default_size(rows)
+      columns       = apply_default_size(columns)
 
-      puts Set.new(rows: rows_count, columns: columns_count, mode: mode)
+      puts Set.new(rows: rows, columns: columns, mode: mode).to_s
     end
 
     def dimensions(size)
