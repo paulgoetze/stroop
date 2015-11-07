@@ -1,16 +1,16 @@
-# # #
-# Get gemspec info
+require "rspec/core/rake_task"
 
-gemspec_file = Dir['*.gemspec'].first 
+RSpec::Core::RakeTask.new(:spec)
+task :default => :spec
+
+# Get gemspec info
+gemspec_file = Dir['*.gemspec'].first
 gemspec = eval File.read(gemspec_file), binding, gemspec_file
 info = "#{gemspec.name} | #{gemspec.version} | " \
        "#{gemspec.runtime_dependencies.size} dependencies | " \
        "#{gemspec.files.size} files"
 
-
-# # #
 # Gem build and install task
-
 desc info
 task :gem do
   puts info + "\n\n"
@@ -21,9 +21,7 @@ task :gem do
 end
 
 
-# # #
 # Start an IRB session with the gem loaded
-
 desc "#{gemspec.name} | IRB"
 task :irb do
   sh "irb -I ./lib -r #{gemspec.name.gsub '-','/'}"

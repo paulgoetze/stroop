@@ -1,8 +1,6 @@
 sudo: false
 language: ruby
 
-script: bundle exec ruby spec/stroop_spec.rb
-
 rvm:
 - 2.2
 - 2.1
