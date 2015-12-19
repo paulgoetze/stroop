@@ -77,7 +77,9 @@ module Stroop
     end
 
     def random_color
-      COLORS.sample
+      color = COLORS.sample
+      color = random_color if color == @latest_random_color
+      @latest_random_color = color
     end
 
     def space
