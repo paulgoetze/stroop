@@ -3,14 +3,22 @@ require_relative 'exceptions'
 
 module Stroop
   class Set
-
-    COLORS = %w{ black white red green blue yellow }
+    COLORS = %w{ black white red green blue yellow }.freeze
 
     NEUTRAL     = :neutral
     CONGRUENT   = :congruent
     INCONGRUENT = :incongruent
 
     MODES  = [NEUTRAL, CONGRUENT, INCONGRUENT].freeze
+
+    BOX = {
+      vertical: "┊",
+      horizontal: "┄",
+      top_left: "┌",
+      top_right: "┐",
+      bottom_left: "└",
+      bottom_right: "┘"
+    }.transform_values(&:light_black).freeze
 
     attr_reader :rows, :columns, :mode
 
@@ -23,13 +31,17 @@ module Stroop
     end
 
     def to_s
-      [empty_line, *lines, empty_line].join("\n")
+      [empty_line(:top), *lines, empty_line(:bottom)].join("\n")
     end
 
     private
 
-    def empty_line
-      wrap(space * (total_word_width * columns))
+    def empty_line(location)
+      corner_left = BOX[:"#{location}_left"]
+      line = BOX[:horizontal] * (total_word_width * columns)
+      corner_right = BOX[:"#{location}_right"]
+
+      corner_left + line + corner_right
     end
 
     def lines
@@ -42,12 +54,12 @@ module Stroop
     end
 
     def wrap(line)
-      space + line + space
+      BOX[:vertical] + line + BOX[:vertical]
     end
 
     def random_word
       word, color = word_color_pair
-      word.center(total_word_width).send(color).bold.on_light_black
+      word.center(total_word_width).send(color).bold
     end
 
     def word_color_pair
@@ -80,10 +92,6 @@ module Stroop
       color = COLORS.sample
       color = random_color if color == @latest_random_color
       @latest_random_color = color
-    end
-
-    def space
-      " ".on_light_black
     end
 
     def max_word_length

@@ -3,20 +3,20 @@ require 'spec_helper'
 describe Stroop::Set do
 
   let(:arguments) { {rows: 1, columns: 2, mode: :neutral } }
-  subject { described_class.new(arguments) }
+  subject { described_class.new(**arguments) }
 
   describe 'creating a new instance' do
     it 'should raise an error if the given mode is not available' do
       expect {
-        described_class.new(arguments.merge({ mode: :not_existing }))
+        described_class.new(**arguments.merge({ mode: :not_existing }))
       }.to raise_error Stroop::SetModeNotAvailable
     end
 
     it 'should not raise an error if the given mode is available' do
       expect {
-        described_class.new(arguments.merge({ mode: :neutral }))
-        described_class.new(arguments.merge({ mode: :congruent }))
-        described_class.new(arguments.merge({ mode: :incongruent }))
+        described_class.new(**arguments.merge({ mode: :neutral }))
+        described_class.new(**arguments.merge({ mode: :congruent }))
+        described_class.new(**arguments.merge({ mode: :incongruent }))
       }.not_to raise_error
     end
   end

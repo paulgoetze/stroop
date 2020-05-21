@@ -2,9 +2,10 @@ sudo: false
 language: ruby
 
 rvm:
-- 2.2
-- 2.1
-- rbx-2
+- ruby-head
+- 2.7
+- 2.6
+- 2.5
 - jruby-head
 - jruby-9000
 
