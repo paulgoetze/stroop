@@ -3,7 +3,6 @@ require_relative 'set'
 
 module Stroop
   class CLI < Thor
-
     DEFAULT_SIZE = 5.freeze
 
     desc 'neutral COLSxROWS', 'prints neutral color words in COLS columns and ROWS rows'
