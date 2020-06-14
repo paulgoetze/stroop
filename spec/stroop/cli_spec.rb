@@ -1,32 +1,35 @@
 require 'spec_helper'
 
 describe Stroop::CLI do
+  let(:seed) { 1234 }
 
   before do
+    allow_any_instance_of(Stroop::Set).to receive(:seed) { seed }
     allow_any_instance_of(Stroop::Set).to receive(:to_s) { '' }
     allow($stdout).to receive(:puts) { '' }
   end
+
+  subject { described_class.new([seed]) }
 
   [:neutral, :congruent, :incongruent].each do |method|
     it { is_expected.to respond_to method }
 
     describe "##{method}" do
-      let(:size) { '1x1' }
+      let(:columns) { 1 }
+      let(:rows) { 1 }
+      let(:args) { "#{columns}x#{rows}" }
 
-      it 'should create a new Stroop::Set' do
-        expect(Stroop::Set).to receive(:new).once
-        subject.send(method, size)
+      it 'prints to the standard output' do
+        expect { subject.send(method, args) }.to output.to_stdout
       end
 
-      it 'should convert the Stroop::Set to a string' do
-        expect_any_instance_of(Stroop::Set).to receive(:to_s).once
-        subject.send(method, size)
-      end
+      it 'prints the stroop set' do
+        set = Stroop::Set.new(columns: columns, rows: rows, mode: method, seed: seed)
+        output = capture(:stdout) { subject.send(method, args) }
 
-      it 'should print to the standard output' do
-        expect { subject.send(method, size) }.to output.to_stdout
+        expect(output).to include set.to_s
+        expect(output).to include "Generated with seed: #{seed}"
       end
     end
   end
-
 end

@@ -1,10 +1,9 @@
 require 'colorize'
 require_relative 'exceptions'
+require_relative 'color_generator'
 
 module Stroop
   class Set
-    COLORS = %w{ black white red green blue yellow }.freeze
-
     NEUTRAL     = :neutral
     CONGRUENT   = :congruent
     INCONGRUENT = :incongruent
@@ -20,14 +19,16 @@ module Stroop
       bottom_right: "┘"
     }.transform_values(&:light_black).freeze
 
-    attr_reader :rows, :columns, :mode
+    attr_reader :rows, :columns, :mode, :seed
 
-    def initialize(rows:, columns:, mode:)
+    def initialize(rows:, columns:, mode:, seed: nil)
       raise SetModeNotAvailable.new unless MODES.include?(mode)
 
-      @rows    = rows.to_i.abs
+      @rows = rows.to_i.abs
       @columns = columns.to_i.abs
-      @mode    = mode.to_sym
+      @mode = mode.to_sym
+      @generator = ColorGenerator.new(seed: seed)
+      @seed = @generator.seed
     end
 
     def to_s
@@ -65,37 +66,20 @@ module Stroop
     def word_color_pair
       case mode
       when :neutral
-        word  = random_color
+        word  = @generator.generate
         color = :black
       when :congruent
-        word  = random_color
+        word  = @generator.generate
         color = word
       when :incongruent
-        word, color = random_different_colors
+        word, color = @generator.generate_pair
       end
 
       [word, color]
     end
 
-    def random_different_colors
-      first  = random_color
-      second = random_color
-
-      while first == second
-        second = random_color
-      end
-
-      [first, second]
-    end
-
-    def random_color
-      color = COLORS.sample
-      color = random_color if color == @latest_random_color
-      @latest_random_color = color
-    end
-
     def max_word_length
-      @max_word_length ||= COLORS.map { |color| color.chars.count }.max
+      @max_word_length ||= ColorGenerator::COLORS.map { |color| color.chars.count }.max
     end
 
     def total_word_width

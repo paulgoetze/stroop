@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.1.0] - 2020-06-14
+### Added
+- A `seed:` keyword argument for `Stroop::Set#initialize`
+- `--seed`/`-s` CLI option to pass a random seed which is used to generate the color words
+
 ## [1.0.0] - 2020-05-21
 ### Removed 
 - Drop support for Ruby <= v2.4
@@ -22,6 +27,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 * Inital release
 
-[Unreleased]: https://github.com/paulgoetze/stroop/compare/v1.0.0...HEAD
+[Unreleased]: https://github.com/paulgoetze/stroop/compare/v1.1.0...HEAD
+[1.1.0]: https://github.com/paulgoetze/stroop/compare/v1.0.0...v1.1.0
 [1.0.0]: https://github.com/paulgoetze/stroop/compare/v0.1.0...v1.0.0
 [0.1.0]: https://github.com/paulgoetze/stroop/releases/tag/v0.1.0
