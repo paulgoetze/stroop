@@ -7,27 +7,34 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.2.0] - 2022-12-27
+### Changed
+- Add support for Ruby v3
+- Drop support fror Ruby < v2.6
+- Update dependencies
+
 ## [1.1.0] - 2020-06-14
 ### Added
 - A `seed:` keyword argument for `Stroop::Set#initialize`
 - `--seed`/`-s` CLI option to pass a random seed which is used to generate the color words
 
 ## [1.0.0] - 2020-05-21
-### Removed 
+### Removed
 - Drop support for Ruby <= v2.4
 
-### Fixed 
+### Fixed
 - Color displaying for the word panel
-- Ensure same colors do not appear multiple times in one row 
+- Ensure same colors do not appear multiple times in one row
 
-### Security 
+### Security
 - Dependency update to fix security issues with [Rake <= v12.3.2](https://github.com/advisories/GHSA-jppv-gw3r-w3q8)
 
 ## [0.1.0] - 2015-11-07
 
 * Inital release
 
-[Unreleased]: https://github.com/paulgoetze/stroop/compare/v1.1.0...HEAD
+[Unreleased]: https://github.com/paulgoetze/stroop/compare/v1.2.0...HEAD
+[1.2.0]: https://github.com/paulgoetze/stroop/compare/v1.1.0...v1.2.0
 [1.1.0]: https://github.com/paulgoetze/stroop/compare/v1.0.0...v1.1.0
 [1.0.0]: https://github.com/paulgoetze/stroop/compare/v0.1.0...v1.0.0
 [0.1.0]: https://github.com/paulgoetze/stroop/releases/tag/v0.1.0
