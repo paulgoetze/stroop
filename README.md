@@ -1,4 +1,4 @@
-# Stroop [![[version]](https://badge.fury.io/rb/stroop.svg)](http://badge.fury.io/rb/stroop)  [![[travis]](https://travis-ci.org/paulgoetze/stroop.png)](https://travis-ci.org/paulgoetze/stroop)
+# Stroop [![[version]](https://badge.fury.io/rb/stroop.svg)](http://badge.fury.io/rb/stroop)  [![Build Status](https://github.com/paulgoetze/stroop/workflows/Tests/badge.svg)](https://github.com/paulgoetze/stroop/workflows/Tests/badge.svg)
 
 Stroop is a tiny CLI for printing Stroop tests in order to experience the psychological [Stroop effect](https://en.wikipedia.org/wiki/Stroop_effect).
 
@@ -44,8 +44,8 @@ For each print out you will find the random seed that was used to generate the c
 You can also pass a seed by using the `--seed` or `-s` option:
 
 ```bash
-$ stroop neutral --seed=1234 
-$ stroop congruent -s 1234 
+$ stroop neutral --seed=1234
+$ stroop congruent -s 1234
 $ stroop incongruent -s 1234
 ```
 
